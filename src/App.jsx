@@ -5,6 +5,7 @@ import StartPage  from './pages/StartPage'
 import OverviewPage from './pages/OverviewPage'
 import SelectionPage from './pages/SelectionPage'
 import EndPage from './pages/EndPage'
+import FractalDescription from './pages/FractalDescription' 
 
 /**
  * トップページ。フラクタル一覧へのリンクを表示する。
@@ -26,6 +27,10 @@ export default function App() {
                 <>
                   <f.component />
 
+                  <FractalDescription 
+                      title={f.name} 
+                      description={f.description} 
+                  />
                   <Link
                     to="/end"
                     style={{
