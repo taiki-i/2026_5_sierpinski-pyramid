@@ -32,14 +32,14 @@ export default function SelectionPage() {
             <p style={design.modalText}>{selected.description}</p>
             
             <div style={design.buttonGroup}>
-              {/* 生成画面へジャンプ！ */}
+              
               <button 
                 style={design.goButton} 
                 onClick={() => navigate(`/${selected.path}/generate`)}
               >
                 GENERATE NOW
               </button>
-              {/* モーダルを閉じる */}
+      
               <button 
                 style={design.cancelButton} 
                 onClick={() => setSelected(null)}
