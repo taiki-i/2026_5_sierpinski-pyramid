@@ -1,100 +1,64 @@
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 
 export default function OverviewPage() {
   return (
     <div style={design.container}>
-        <div style={design.overlay}></div>
-        <div style={design.content}>
-            <h1 style={design.title}>フラクタルとは？</h1>
-
-            <p style={design.description}>
-                説明文<br />
-                説明文
-            </p> 
-              
-            <Link 
-                to="/selection" 
-                style={design.button}
-                onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxshadow = '0 4px 15px rgba(0, 0, 0, 0.03)';
-                }}
-                onMouseLeave={(e) => {
-                    e.target.style.transform = 'tranlateY(0)';
-                    e.target.style.backgroundColor = 'transparent';
-                }}
-            >
-                図形を選ぶ
-            </Link>
+      <div style={design.window}>
+        <h2 style={design.heading}>WHAT IS FRACTALS?</h2>
+        
+        <div style={design.textContainer}>
+          <p style={design.text}>
+            説明文<br />
+          </p>
+          <p style={design.text}>
+            説明文<br />
+          </p>
+         
         </div>
+
+        <Link to="/selection" style={design.nextButton}>
+          NEXT &gt;&gt;
+        </Link>
+      </div>
     </div>
   );
 }
 
 const design = {
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    width: '100vw',
-    fontFamily: '"Zen Maru Gothic", "Hiragino Rounded W3 JIS2004", "Noto Sans JP", sans-serif',
-    padding: '2rem',
-    boxSizing: 'border-box'
+    minHeight: '100vh', width: '100vw', 
+    display: 'flex', justifyContent: 'center', alignItems: 'center',
+    fontFamily: '"Impact", "Arial Black", "Noto Sans JP", sans-serif',
+    padding: '2rem'
   },
 
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    backdropFilter: 'blur(8px)',
-    zIndex: 1
+  window: {
+    backgroundColor: 'rgba(0, 229, 255, 0.05)', 
+    border: '2px solid #00e5ff',
+    boxShadow: '0 0 15px rgba(0, 229, 255, 0.3), inset 0 0 20px rgba(0, 229, 255, 0.1)',
+    padding: '3rem', width: '100%', maxWidth: '700px',
+    clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)'
   },
 
-  content: {
-    position: 'relative',
-    zIndex: 10,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    gap: '2.rem',
-    padding: '2rem',
-    width: '100%'
+  heading: {
+    color: '#fc0fc0', fontSize: '2.5rem', marginTop: 0,
+    textShadow: '2px 2px 0px rgba(255,255,255,0.8)', letterSpacing: '0.1em',
+    borderBottom: '2px dashed #fc0fc0', paddingBottom: '1rem'
   },
 
-  title: {
-    fontSize: 'clamp(1.8rem, 3vw, 2.2rem)',
-    color: '#4b4848',
-    margin: 0,
-    fontWeight: 'normal',
-    letterSpacing: '0.1em'
+  textContainer: {
+    margin: '2rem 0', display: 'flex', flexDirection: 'column', gap: '1.5rem'
   },
 
-  description: {
-    fontSize: 'clamp(1rem, 1.5vw, 1.1rem)',
-    color: '#63636b',
-    lineHeight: '2.2', 
-    letterSpacing: '0.05em',
-    margin: 0
+  text: {
+    color: '#e0e0e0', fontSize: '1.2rem', lineHeight: '1.8',
+    fontWeight: 'bold', fontFamily: '"Noto Sans JP", sans-serif'
   },
 
-  button: {
-    marginTop: '1rem',
-    padding: '1rem 3.5rem',
-    fontSize: '1.05rem',
-    fontWeight: 'bold',
-    letterSpacing: '0.1em',
-    color: '#52525b',
-    backgroundColor: '#ffffff', 
-    border: '1px solid rgba(0, 0, 0, 0.05)',
-    borderRadius: '50px',
-    textDecoration: 'none',
-    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.07)',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+  nextButton: {
+    display: 'inline-block', padding: '10px 30px',
+    backgroundColor: '#00e5ff', color: '#000', textDecoration: 'none',
+    fontSize: '1.5rem', fontWeight: 'bold', float: 'right',
+    boxShadow: '4px 4px 0 #008899', transition: 'all 0.1s', cursor: 'pointer'
   }
 };

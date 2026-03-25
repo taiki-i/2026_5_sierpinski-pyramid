@@ -3,75 +3,63 @@ import { Link } from 'react-router-dom';
 export default function StartPage() {
   return (
     <div style={design.container}>
+      <div style={design.scanlines}></div> 
+      
       <div style={design.content}>
         <h1 style={design.title}>
-          フラクタル</h1>
+          <span style={design.neonCyan}>FRACTAL</span><br />
+          <span style={design.neonPink}>3D VIEWER</span>
+        </h1>
         
-        <Link 
-          to="/overview" 
-          style={design.button}
-          onMouseEnter={(e) => {
-            e.target.style.transform = 'translateY(-3px)';
-            e.target.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.08)';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.transform = 'translateY(0)';
-            e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.04)';
-          }}
-        >
-          はじめる
+        <Link to="/overview" style={design.startButton}>
+          PRESS START
         </Link>
       </div>
     </div>
   );
 }
 
-
 const design = {
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    width: '100vw',
-   
-    fontFamily: '"Zen Maru Gothic", "Hiragino Rounded W3 JIS2004", "Noto Sans JP", sans-serif',
-    color: '#52525b'
+    display: 'flex', justifyContent: 'center', alignItems: 'center',
+    minHeight: '100vh', width: '100vw',
+    backgroundColor: '#0a0a0f', 
+    fontFamily: '"Impact", "Arial Black", sans-serif',
+    position: 'relative', overflow: 'hidden'
+  },
+
+  scanlines: {
+    position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+    background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))',
+    backgroundSize: '100% 4px, 3px 100%',
+    pointerEvents: 'none', zIndex: 1
   },
 
   content: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    gap: '2.5rem', 
-    padding: '2rem',
-    zIndex: 10
+    zIndex: 10, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '4rem'
   },
 
   title: {
-    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-    fontWeight: '300', 
-    letterSpacing: '0.05em',
-    lineHeight: '1.2',
-    margin: 0,
-    color: '#3f3f46'
+    fontSize: 'clamp(4rem, 10vw, 7rem)', margin: 0, lineHeight: '1.1',
+    letterSpacing: '0.05em', transform: 'skew(-5deg)'
   },
-  
-  button: {
-    marginTop: '1rem',
-    padding: '1rem 3.5rem',
-    fontSize: '1.1rem',
-    fontWeight: 'bold',
-    letterSpacing: '0.1em',
-    color: '#52525b',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)', 
-    backdropFilter: 'blur(10px)', 
-    border: '1px solid rgba(255, 255, 255, 0.8)',
-    borderRadius: '50px', 
-    textDecoration: 'none',
-    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.04)', 
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
-    cursor: 'pointer'
+
+  neonCyan: {
+    color: '#fff', textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00e5ff, 0 0 40px #00e5ff, 0 0 80px #00e5ff'
+  },
+
+  neonPink: {
+    color: '#fff', textShadow: '0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fc0fc0, 0 0 40px #ff0055, 0 0 80px #ff0055'
+  },
+
+  startButton: {
+    display: 'inline-block', padding: '15px 40px', fontSize: '1.5rem',
+    color: '#ffee00', textDecoration: 'none',
+    border: '4px solid #ffee00', borderRadius: '0',
+    boxShadow: '0 0 10px #ffee00, inset 0 0 10px #ffee00',
+    backgroundColor: 'rgba(255, 238, 0, 0.1)',
+    textShadow: '0 0 5px #ffee00',
+    animation: 'blink 1.5s infinite alternate', 
+    transition: 'all 0.1s', cursor: 'pointer'
   }
 };

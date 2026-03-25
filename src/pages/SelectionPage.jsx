@@ -1,100 +1,107 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import { fractals } from '../fractals';
 
-
 export default function SelectionPage() {
+  const [selected, setSelected] = useState(null); 
+  const navigate = useNavigate();
+
   return (
     <div style={design.container}>
-        <div style={design.content}>
-            <h1 style={design.title}>図形の選択</h1>
+      <h2 style={design.stageTitle}>SELECT STAGE</h2>
+      
+      <div style={design.grid}>
+        {fractals.map((f) => (
+          <button 
+            key={f.path} 
+            style={design.card}
+            onClick={() => setSelected(f)} 
+            onMouseEnter={(e) => { e.target.style.boxShadow = '0 0 20px #00e5ff, inset 0 0 10px #00e5ff'; }}
+            onMouseLeave={(e) => { e.target.style.boxShadow = 'none'; }}
+          >
+            {f.name}
+          </button>
+        ))}
+      </div>
+
+      {/*モーダルウィンドウ*/}
+      {selected && (
+        <div style={design.modalOverlay}>
+          <div style={design.modalContent}>
+            <h3 style={design.modalTitle}>{selected.name}</h3>
+            <p style={design.modalText}>{selected.description}</p>
             
-            <div style={design.bubbleGrid}>
-                {fractals.map((f) => (
-                    <Link
-                        key={f.path}
-                        to={`/${f.path}`}
-                        style={design.bubble}
-                        onMouseEnter={(e) => {
-                            e.target.style.transform = 'translateY(-10px) scale(1.05)';
-                            e.target.style.boxShadow = 'inset 0 0 040px rgba(255, 255, 255, 0.8), 0 10px 25px rgba(0, 0, 0, 0.08)';
-                            e.target.style.borderColor = 'rgba(255, 255, 255, 0.8)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.target.style.transform = 'translateY(0) scale(1)';
-                            e.target.style.boxShadow = 'inset 0 0 20px rgba(255, 255, 255, 0.4), 0 4px 15px rgba(0, 0, 0, 0.03)';
-                            e.target.style.borderColor = 'rgba(255, 255, 255, 0.4)';
-                        }}
-                    >
-                        <span style={design.bubbleText}>{f.name}</span>
-                    </Link>
-                ))}
+            <div style={design.buttonGroup}>
+              {/* 生成画面へジャンプ！ */}
+              <button 
+                style={design.goButton} 
+                onClick={() => navigate(`/${selected.path}/generate`)}
+              >
+                GENERATE NOW
+              </button>
+              {/* モーダルを閉じる */}
+              <button 
+                style={design.cancelButton} 
+                onClick={() => setSelected(null)}
+              >
+                CANCEL
+              </button>
             </div>
+          </div>
         </div>
+      )}
     </div>
   );
 }
 
 const design = {
   container: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    width: '100vw',
-    fontFamily: '"Zen Maru Gothic", "Hiragino Rounded W3 JIS2004", "Noto Sans JP", sans-serif',
+    minHeight: '100vh', width: '100vw', backgroundColor: '#0a0a0f',
+    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+    fontFamily: '"Impact", "Arial Black", sans-serif', padding: '2rem'
   },
 
-  content: {
-    position: 'relative',
-    zIndex: 10,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%',
-    maxWidth: '1000px',
-    padding: '2rem',
-    gap: '4rem'
+  stageTitle: {
+    color: '#00e5ff', fontSize: '3rem', letterSpacing: '0.2em',
+    textShadow: '3px 3px 0px #fc0fc0', marginBottom: '3rem'
   },
 
-  title: {
-    fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
-    color: '#52525b',
-    margin: 0,
-    fontWeight: '300',
-    letterSpacing: '0.1em'
+  grid: {
+    display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center'
   },
 
-  bubbleGrid: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: '3rem'
+  card: {
+    width: '200px', height: '100px', backgroundColor: 'transparent',
+    border: '2px solid #00e5ff', color: '#fff', fontSize: '1.2rem',
+    cursor: 'pointer', transition: '0.2s', transform: 'skew(-10deg)'
   },
 
-  bubble: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 'clamp(150px, 20vw, 200px)', 
-    aspectRatio: '1 / 1', 
-    borderRadius: '50%',
-    textDecoration: 'none',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)', 
-    border: '1px solid rgba(255, 255, 255, 0.4)', 
-    backdropFilter: 'blur(4px)', 
-    WebkitBackdropFilter: 'blur(4px)',
-    boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.4), 0 4px 15px rgba(0, 0, 0, 0.03)',
-    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
+  //モーダル用
+  modalOverlay: {
+    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(5px)',
+    display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 100
   },
 
-  bubbleText: {
-    color: '#4b4848',
-    fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
-    fontWeight: 'normal',
-    letterSpacing: '0.05em',
-    textAlign: 'center',
-    padding: '1rem',
-    pointerEvents: 'none'
+  modalContent: {
+    backgroundColor: '#1a1a24', border: '4px solid #fc0fc0',
+    boxShadow: '0 0 30px #fcofc0', padding: '3rem', width: '90%', maxWidth: '500px',
+    textAlign: 'center', transform: 'skew(-5deg)'
+  },
+
+  modalTitle: { color: '#fff', fontSize: '2.5rem', margin: '0 0 1rem 0' },
+
+  modalText: { color: '#aaa', fontSize: '1.2rem', fontFamily: 'sans-serif', marginBottom: '2rem' },
+
+  buttonGroup: { display: 'flex', gap: '1rem', justifyContent: 'center' },
+
+  goButton: {
+    padding: '10px 20px', backgroundColor: '#00e5ff', color: '#000',
+    border: 'none', fontSize: '1.2rem', fontWeight: 'bold', cursor: 'pointer'
+  },
+
+  cancelButton: {
+    padding: '10px 20px', backgroundColor: 'transparent', color: '#ff0055',
+    border: '2px solid #ff0055', fontSize: '1.2rem', fontWeight: 'bold', cursor: 'pointer'
   }
 };

@@ -1,82 +1,42 @@
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 
 export default function EndPage() {
   return (
     <div style={design.container}>
-        <div style={design.overlay}></div>
-        <div style={design.content}>
-            <h1 style={design.title}>ご利用ありがとうございました！</h1>
-            <Link  
-                to="/" 
-                style={design.button}
-                onMouseEnter={(e) => {
-                    e.target.style.color = '#3f3f46';
-                    e.target.style.letterSpacing = '0.3em';
-                }}
-                onMouseLeave={(e) => {
-                    e.target.style.color = '#71717a';
-                    e.target.style.letterSpacing = '0.15em';
-                }}
-            >
-                始めのページへ
-            </Link>
-        </div>
+      <div style={design.content}>
+        <h1 style={design.title}>THANK YOU FOR PLAYING.</h1>
+        <p style={design.message}>GOOD LUCK!</p>
+        
+        <Link to="/" style={design.restartButton}>
+          PRESS TO RESTART
+        </Link>
+      </div>
     </div>
   );
 }
 
 const design = {
   container: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    width: '100vw',
-    fontFamily: '"Shippori Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif'
+    display: 'flex', justifyContent: 'center', alignItems: 'center',
+    minHeight: '100vh', width: '100vw', backgroundColor: '#0a0a0f',
+    fontFamily: '"Impact", "Arial Black", sans-serif'
   },
 
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    background: 'radial-gradient(circle, transparent 30%, rgba(253, 251, 247, 0.9) 100%)',
-    zIndex: 1,
-    pointerEvents: 'none'
-  },
-
-  content: {
-    position: 'relative',
-    zIndex: 10,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    gap: '4rem', 
-    padding: '2rem'
-  },
+  content: { textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '2rem' },
 
   title: {
-    fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-    color: '#52525b',
-    lineHeight: '2.5',
-    letterSpacing: '0.15em',
-    margin: 0,
-    fontWeight: 'normal'
+    fontSize: '5rem', margin: 0, color: '#fcfae1',
+    textShadow: '0 0 20px #ffee00, 4px 4px 0px #ff0055'
   },
 
-  button: {
-    marginTop: '2rem',
-    padding: '1rem',
-    fontSize: '0.9rem',
-    color: '#71717a',
-    textDecoration: 'none',
-    letterSpacing: '0.15em',
-    borderBottom: '1px solid #d4d4d8', 
-    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)', 
-    cursor: 'pointer'
+  score: { color: '#00e5ff', fontSize: '2rem', margin: 0 },
+
+  message: { color: '#fff', fontFamily: 'sans-serif', letterSpacing: '0.2em' },
+
+  restartButton: {
+    marginTop: '3rem', display: 'inline-block', padding: '15px 30px',
+    backgroundColor: '#ffee00', color: '#fff', textDecoration: 'none',
+    fontSize: '1.2rem', fontWeight: 'bold', boxShadow: '0 6px 0 #990033', 
+    transition: 'all 0.1s', cursor: 'pointer'
   }
 };
